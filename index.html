@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface de Vídeo Porteiro</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --panel-color: #2d2d2d;
+            --text-color: #ffffff;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --accent-color: #3498db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .intercom-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--panel-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            overflow: hidden;
+            padding: 16px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #444;
+            margin-bottom: 16px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: var(--success-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .video-screen {
+            width: 100%;
+            height: 240px;
+            background-color: #000;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Simulação de imagem de câmara se não houver stream */
+        .video-placeholder {
+            color: #666;
+            text-align: center;
+        }
+
+        .live-indicator {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: var(--danger-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-unlock {
+            background-color: var(--success-color);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-unlock:hover { background-color: #27ae60; }
+
+        .btn-talk {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-talk:hover { background-color: #2980b9; }
+
+        .btn-decline {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-decline:hover { background-color: #c0392b; }
+    </style>
+</head>
+<body>
+
+    <div class="intercom-container">
+        <div class="header">
+            <span class="status-badge">Portão Principal</span>
+        </div>
+
+        <!-- Tela de Vídeo -->
+        <div class="video-screen">
+            <span class="live-indicator">AO VIVO</span>
+            
+            <!-- Substituir a div abaixo pela tag <video> se integrares com uma câmara real -->
+            <div class="video-placeholder">
+                <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                    <path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2zm5.396 7.438a2.5 2.5 0 1 1-.792-.792l-1.425-1.425a4 4 0 1 0 1.414 1.414l1.425 1.425z"/>
+                </svg>
+                <p style="margin: 8px 0 0; font-size: 14px;">A carregar sinal...</p>
+            </div>
+        </div>
+
+        <!-- Painel de Ações -->
+        <div class="controls-grid">
+            <button class="btn btn-talk" onclick="toggleMute()">🎙️ Falar</button>
+            <button class="btn btn-decline" onclick="endCall()">❌ Desligar</button>
+            <button class="btn btn-unlock" onclick="unlockDoor()">🔓 Abrir Porta</button>
+        </div>
+    </div>
+
+    <script>
+        // Funções lógicas para interagir com o hardware (via API, MQTT ou WebSockets)
+        function toggleMute() {
+            alert("Microfone ativado/desativado");
+        }
+
+        function endCall() {
+            alert("Chamada encerrada");
+        }
+
+        function unlockDoor() {
+            alert("Sinal enviado: Porta aberta!");
+        }
+    </script>
+
+</body>
+  </html>
+  
